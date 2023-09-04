@@ -542,6 +542,9 @@ static CONST_TABLE(u1_t, rxlorairqmask)[] = {
 static void rxlora (u1_t rxmode) {
     // select LoRa modem (from sleep mode)
     opmodeLora();
+    // ERROR < < < <
+    // ASSERT es para abortar el programa si retorna falso
+    // readReg(RegOpMode) == False o OPMODE_LORA == False ??
     ASSERT((readReg(RegOpMode) & OPMODE_LORA) != 0);
     // enter standby mode (warm up))
     opmode(OPMODE_STANDBY);

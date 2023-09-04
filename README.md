@@ -54,25 +54,6 @@ Run the examples....
  #define RF_RST_PIN RPI_V2_GPIO_P1_11 // Reset on GPIO17 so P1 connector pin #11
 ```
 
-`raspi-lmic/examples/ttn-otaa/`: using a Raspi as a TTN node: 
-
-* lines to be modified:
-
-  1. `static const u1_t PROGMEM APPEUI[8]= { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };`
-
-     This EUI must be in **little-endian format**, ... For TTN issued EUIs the last bytes should be 0xD5, 0xB3,0x70.
-
-  2. `static const u1_t PROGMEM DEVEUI[8]= { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };`
-
-     This EUI must be in **little-endian format**
-
-  3. `static const u1_t PROGMEM APPKEY[16] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };`
-
-     This key should be in big endian format
-
-* run using `sudo`
-
-
 
 ---
 
@@ -103,30 +84,6 @@ const lmic_pinmap lmic_pins = {
 ```
 
 Then in your code you'll have exposed RF_CS_PIN, RF_IRQ_PIN, RF_RST_PIN and RF_LED_PIN and you'll be able to do some `#ifdef RF_LED_LIN` for example. See [ttn-otaa](https://github.com/hallard/arduino-lmic/tree/rpi/examples/raspi/ttn-otaa/ttn-otaa.cpp) sample code.
-
-**Going further with examples:**
-
-go to example folder here spi_scan
-```shell
-cd raspi-lmic/examples/spi_scan
-```
-Build executable
-```shell
-$ make
-```
-And run (likely has to be done with root rights)
-```shell
-$ sudo ./spi_scan
-Checking register(0x42) with CS=GPIO06 => Nothing!
-Checking register(0x10) with CS=GPIO06 => Nothing!
-Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
-Checking register(0x10) with CS=GPIO08 => Nothing!
-Checking register(0x42) with CS=GPIO07 => Nothing!
-Checking register(0x10) with CS=GPIO07 => Nothing!
-Checking register(0x42) with CS=GPIO26 => Nothing!
-Checking register(0x10) with CS=GPIO26 => Nothing!
-```
-And voila! with [LoRasPi](https://github.com/hallard/LoRasPI) board RFM95 dedected on SPI with GPIO8 (CE0)
 
 
 Features
